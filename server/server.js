@@ -28,6 +28,8 @@ mongoose.connect(process.env.DB_LOCATION, {
     autoIndex: true
 })
 
+
+
 const formatDatatoSend = (user) =>{
 
     const access_token = jwt.sign({ id: user._id },  process.env.SECRET_ACCESS_KEY)

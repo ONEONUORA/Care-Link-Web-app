@@ -21,17 +21,17 @@ const UserNavigationPanel = () =>{
                 transition={{duration:0.2}}
             >
                 <div className="usernav">
-                        <Link to={`/user/${username}`} className="link pl-5"> 
+                        {/* <Link to={`/user/${username}/`} className="link pl-5"> 
                             Profile
                         </Link>
 
                         <Link to='edit-profile' className="link pl-5"> 
                             Dashboard
-                        </Link>
+                        </Link> */}
 
-                        <Link to='edit-profile' className="link pl-5"> 
+                        {/* <Link to='edit-profile' className="link pl-5"> 
                             Settings
-                        </Link>
+                        </Link> */}
 
                         <span className="position-absolute border-top border-color-gray w-100"></span>
                         <button className="btn signout-btn" type="submit"

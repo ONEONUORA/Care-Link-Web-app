@@ -16,6 +16,9 @@ import Privacy from './pages/privacy-page';
 import TermsConditions from './pages/terms&conditions-page';
 import DoctorDashboard from './pages/doctor-dasboard.page';
 import PageNotFound from './pages/404-page';
+import Payment from './pages/payment.page';
+
+
 
 
 
@@ -39,10 +42,12 @@ const App = () => {
                     <Routes>
                         <Route exact element ={ <Navbar/>}>
                              <Route path='/' element ={<HomePage/>}/>
-                            <Route path='/patient-dashboard' element={<PatientDashboard/>}/>
-                            <Route path='/doctor-dashboard' element={<DoctorDashboard/>}/>
+                            <Route path='/patient-dashboard.page' element={<PatientDashboard/>}/>
+                            <Route path='/doctor-dashboard.page' element={<DoctorDashboard/>}/>
+                            <Route path='/payment.page' element={<Payment/>}/>
                             <Route path="/signin" element={<UserAuthForm type='sign-in'/>}/>
                             <Route path="/signup" element={<UserAuthForm type='sign-up'/>}/>
+                          
                            <Route path='/contactUs-page' element={<ContactUs/>}/>
                            <Route path='/About-page' element={<About/>}/>
                            <Route path ="/how-to-use-page" element={<HowToUse/>}/>

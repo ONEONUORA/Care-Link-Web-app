@@ -1,6 +1,6 @@
 import bgImage1 from "../assets/bg-image.png"
 import InputBox from "../components/input.component";
-import {Link, Navigate ,useNavigate}  from "react-router-dom"
+import {Link, useNavigate}  from "react-router-dom"
 import AnimationWrapper from "../common/page-animation";
 import { useContext, useState, useEffect } from "react";
 import {Toaster, toast}  from "react-hot-toast"
@@ -11,8 +11,7 @@ import { UserContext } from "../App";
 
 const UserAuthForm =({ type }) =>{
 
-  // const authForm = useRef();
-  const [role, setRole] = useState();
+  const [role, setRole] = useState('patient');
 
   let { userAuth : {access_token, role: userRole} , setUserAuth  } = useContext(UserContext)
   console.log(access_token)
@@ -21,9 +20,9 @@ const UserAuthForm =({ type }) =>{
   useEffect(() => {
     if (access_token) {
       if (userRole === 'doctor') {
-        navigate('/doctor-dashboard');
+        navigate('/doctor-dashboard.page');
       } else {
-        navigate('/patient-dashboard');
+        navigate('/patient-dashboard.page');
       }
     }
   }, [access_token, userRole, navigate]);
@@ -31,15 +30,16 @@ const UserAuthForm =({ type }) =>{
   const userAuthThroughServer = (serverRoute, formData)=>{
 
     axios.post(import.meta.env.VITE_SERVER_DOMAIN +  serverRoute, formData)
-    .then (({ data }) =>{
-       storeInSession("user", JSON.stringify(data))
-      setUserAuth(data)
-      if (status === 201) {
+    .then (({ data, status }) =>{
+       
+      if (status === 200) {
+         storeInSession("user", JSON.stringify(data))
+          setUserAuth(data)
         // Navigate to the appropriate dashboard based on user role
-        if (role === 'doctor') {
-          navigate('/doctor-dashboard');
+        if (data.role === 'doctor') {
+          navigate('/doctor-dashboard.page');
         } else {
-          navigate('/patient-dashboard');
+          navigate('/patient-dashboard.page');
         }
       }
     })
@@ -113,8 +113,7 @@ const UserAuthForm =({ type }) =>{
                                <input
                                  type="radio"
                                  name="role"
-                                  value="Patient"
-                              
+                                  value="patient"
                                   checked={role === "patient"}
                                   onChange={() => setRole("patient")}
                                 />
@@ -124,7 +123,6 @@ const UserAuthForm =({ type }) =>{
                                 <input
                                  type="radio"
                                   name="role"
-                                 
                                   value="doctor"
                                   checked={role === "doctor"}
                                   onChange={() => setRole("doctor")}
@@ -132,7 +130,7 @@ const UserAuthForm =({ type }) =>{
                                Doctor
                              </label>
                       
-                      </div>
+                        </div>
 
                             <InputBox
                               name="fullname"
@@ -169,16 +167,16 @@ const UserAuthForm =({ type }) =>{
                           {type.replace("-", " ")}
                       </button>
 
-                      <div className="google">
+                      {/* <div className="google">
                           <hr className="custom-class"/>
                             <p style={{marginTop:'5px'}}>or</p>
                           <hr className="custom-class"/>
-                      </div>
+                      </div> */}
 
-                      <button className="btn-dark center">
+                      {/* <button className="btn-dark center">
                         <i className="bi bi-google" style={{padding:'5px'}}></i>
                         Continue With Google
-                      </button>
+                      </button> */}
 
                       {
 
@@ -210,3 +208,5 @@ const UserAuthForm =({ type }) =>{
 };
 
 export default UserAuthForm;
+
+
