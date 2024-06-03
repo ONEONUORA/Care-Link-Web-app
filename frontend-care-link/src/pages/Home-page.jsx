@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 
 import nurse1 from "../assets/nurse1.png"
 import bgImage from '../assets/bg-image.png'
@@ -8,7 +9,9 @@ import brandlogo from '../assets/logo.png'
 import { Link } from "react-router-dom"
 
 
+
 const HomePage = () =>{
+
     return(
         <>
             <div className="home1" >
@@ -19,8 +22,7 @@ const HomePage = () =>{
                         <h1 style={{margin:"2rem", color:'lightskyblue'}}> Connect with the Right Doctor<br/> Right Now!</h1>
                         <button className="btn btn-primary mb-2" style={{cursor:'default'}}>Round-the-Clock Care, Just a Click Away</button>
                         <h5 className="mb-3 text-success">Seamless appointment booking</h5>
-                        <Link to='patient-dashboard'><button className="btn btn-outline-primary">Book An Appointment</button></Link>
-                        
+                        <Link to='/signin'><button className="btn btn-outline-primary">Book An Appointment</button></Link>
                     </div>
                     <div className="col-12 col-md-6 border1"  >
                             <img src={nurse1} alt="Image of a nurse"/>

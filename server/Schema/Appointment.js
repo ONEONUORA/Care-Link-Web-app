@@ -1,27 +1,83 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+
+// const appointmentSchema = new mongoose.Schema({
+//     patient: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User',
+//         required: true,
+//     },
+//     doctor: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User',
+//         required: true,
+//     },
+//     appointmentDate: {
+//         type: Date,
+//         required: true,
+//     },
+//     status: {
+//         type: String,
+//         enum: ['pending', 'confirmed', 'cancelled', 'completed'],
+//         default: 'pending',
+//     },
+// }, {
+//     timestamps: true
+// });
+
+// export default mongoose.model('Appointment', appointmentSchema);
+
+// models/Appointment.js
+
+
+
+// import mongoose from "mongoose";
+
+// const appointmentSchema = new mongoose.Schema({
+//     patientId: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User',
+//         required: true
+//     },
+//     date: {
+//         type: Date,
+//         required: true
+//     },
+//     medicalHistory: {
+//         type: String,
+//         required: true
+//     },
+//     status: {
+//         type: String,
+//         default: 'Pending'
+//     }
+// });
+
+// const Appointment = mongoose.model('Appointment', appointmentSchema);
+// module.exports = Appointment;
+
+// models/Appointment.js
+import mongoose from 'mongoose';
 
 const appointmentSchema = new mongoose.Schema({
-    patient: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
+        required: true
     },
-    doctor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
-    appointmentDate: {
+    date: {
         type: Date,
-        required: true,
+        required: true
     },
-    status: {
+    medicalHistory: {
         type: String,
-        enum: ['pending', 'confirmed', 'cancelled', 'completed'],
-        default: 'pending',
-    },
-}, {
-    timestamps: true
-});
+        required: true
+    }
+}, { timestamps: true });
 
-export default mongoose.model('Appointment', appointmentSchema);
+const Appointment = mongoose.model('Appointment', appointmentSchema);
+
+export default Appointment;
+
+
+
+

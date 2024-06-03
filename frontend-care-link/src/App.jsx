@@ -47,7 +47,6 @@ const App = () => {
                             <Route path='/payment.page' element={<Payment/>}/>
                             <Route path="/signin" element={<UserAuthForm type='sign-in'/>}/>
                             <Route path="/signup" element={<UserAuthForm type='sign-up'/>}/>
-                          
                            <Route path='/contactUs-page' element={<ContactUs/>}/>
                            <Route path='/About-page' element={<About/>}/>
                            <Route path ="/how-to-use-page" element={<HowToUse/>}/>
