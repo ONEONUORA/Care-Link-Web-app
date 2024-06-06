@@ -210,7 +210,8 @@ const formatDatatoSend = (user) => {
         profile_img: user.personal_info.profile_img,
         username: user.personal_info.username,
         fullname: user.personal_info.fullname,
-        role: user.personal_info.role
+        role: user.personal_info.role,
+        email: user.personal_info.email
     };
 }
 
@@ -307,33 +308,80 @@ server.post("/signin", async (req, res) => {
 
 
 // Appointment route
-server.post('/api/appointments', verifyToken, async (req, res) => {
+
+server.post('/api/appointments', async (req, res) => {
+    const {user:{fullname, email} , date, time, details } = req.body;
+
+    if (!fullname || !email || !date || !time || !details) {
+        return res.status(400).send({ error: 'All fields are required.' });
+    }
+
+    const newAppointment = new Appointment({ user: { fullname, email }, date, time, details });
+
     try {
-        const { userId, date, medicalHistory } = req.body;
-        console.log('Received data:', { userId, date, medicalHistory });
-
-        if (!userId || !date || !medicalHistory) {
-            return res.status(400).json({ message: 'All fields are required.' });
-        }
-
-        const newAppointment = new Appointment({
-            userId,
-            date,
-            medicalHistory
-        });
-
         await newAppointment.save();
-        console.log('Appointment saved:', newAppointment);
-        res.status(201).json(newAppointment);
+        res.status(201).send(newAppointment);
     } catch (error) {
-        console.error('Error booking appointment:', error);
-        if (error.name === 'ValidationError') {
-            return res.status(400).json({ message: 'Validation error', error: error.message });
-        }
-        res.status(500).json({ message: 'Error booking appointment', error });
+        res.status(400).send(error);
     }
 });
 
+
+
+  // Get all appointments for a single doctor
+  server.get('/api/appointments',verifyToken, async (req, res) => {
+    try {
+        const appointments = await Appointment.find(); // Adjust the query as needed
+        res.json(appointments);
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        res.status(500).json({ message: 'Server error, please try again later.' });
+    }
+});
+
+/********************************endpoint to update the appointment status*************************** */
+server.get('/api/appointments/patient',verifyToken, async (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+        return res.status(400).send({ error: 'Email is required.' });
+    }
+
+    try {
+        const appointments = await Appointment.find({ 'user.email': email });
+        res.status(200).send(appointments);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+
+// Add endpoint to update appointment status
+server.patch('/api/appointments/:id/status',verifyToken, async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+  
+    if (!['pending', 'confirmed'].includes(status)) {
+      return res.status(400).send({ error: 'Invalid status' });
+    }
+  
+    try {
+      const appointment = await Appointment.findByIdAndUpdate(
+        id,
+        { status },
+        { new: true }
+      );
+  
+      if (!appointment) {
+        return res.status(404).send({ error: 'Appointment not found' });
+      }
+  
+      res.status(200).send(appointment);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+  
 
 // Start server
 server.listen(PORT, () => {

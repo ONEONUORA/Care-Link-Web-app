@@ -1,302 +1,195 @@
 
-
-// import { useContext, useState } from "react";
-// import { UserContext } from "../App";
-// import { Navigate, useNavigate } from "react-router-dom";
-// import bgImage from "../assets/bg-image.png";
-
-// const PatientDashboard = () => {
-//     const [selectedDate, setSelectedDate] = useState('');
-//     const [medicalHistory, setMedicalHistory] = useState('');
-//     const navigate = useNavigate();
-
-//     const handleDateChange = (event) => {
-//         setSelectedDate(event.target.value);
-//     };
-
-//     const handleMedicalHistoryChange = (event) => {
-//         setMedicalHistory(event.target.value);
-//     };
-
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-//         if (!selectedDate || !medicalHistory) {
-//             alert("All fields are required. Please fill in all fields.");
-//             return;
-//         }
-//         navigate('/payment.page');
-//     };
-
-//     let { userAuth: { access_token, fullname, role } } = useContext(UserContext);
-//     let characterLimit = 200;
-//     const handleTitleKeyDown = (e) => {
-//         if (e.keyCode === 13) { // enter key
-//             e.preventDefault();
-//         }
-//     };
-
-//     return (
-//         access_token === null ? <Navigate to="/signin" /> :
-
-//         <section className="h-cover mb-5">
-//             <div>
-//                 <p style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'blue', borderBottom: '3px solid black', paddingBottom: '2rem' }}>Welcome back {fullname}</p>
-//                 <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'red', borderBottom: '2px solid black', paddingBottom: '1rem' }}>{role} dashboard</h5>
-//             </div>
-
-//             <div className="row">
-//                 <div className="col-12">
-//                     <img src={bgImage} style={{ width: '95px', display: 'block', margin: '0 auto' }} />
-//                     <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', marginTop: '2rem', marginBottom: '2rem' }}>Welcome to Care-Link <br /> Your Bridge to Better Health</h5>
-//                 </div>
-
-//                 <div className="col-12" style={{ width: '100%', display: 'block', justifyContent: 'center', margin: '0 auto' }}>
-
-//                     <form onSubmit={handleSubmit} style={{ textAlign: 'center', border: '5px solid red', borderTopRightRadius: '2rem', borderBottomLeftRadius: '2rem', paddingTop: '10px', paddingBottom: '10px', backgroundColor: 'blue', paddingLeft: "10px", paddingRight: '10px' }}>
-
-//                         <div style={{ display: "flex", justifyContent: 'center', textAlign: 'center', gap: '20px', marginBottom: "2rem", marginTop: '3rem' }}>
-//                             <label style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'white' }}>Select Date and Time</label>
-//                             <input type="datetime-local" value={selectedDate} onChange={handleDateChange} />
-//                         </div>
-
-//                         <div style={{ display: "flex", justifyContent: 'center', textAlign: 'center', gap: '20px', marginBottom: "2rem", marginTop: '3rem' }}>
-//                             <label style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'white' }}> Medical History  </label>
-//                             <textarea
-//                                 maxLength={characterLimit}
-//                                 value={medicalHistory}
-//                                 onChange={handleMedicalHistoryChange}
-//                                 className="h-40 resize-none leading-7 input-box2"
-//                                 onKeyDown={handleTitleKeyDown}
-//                             >
-//                             </textarea>
-//                         </div>
-//                         <p className="text-white">Fee For Consultation -  10000</p>
-//                         <button className="btn btn-primary mb-3" type="submit">Book Appointment</button>
-
-//                     </form>
-//                 </div>
-//             </div>
-//         </section>
-//     );
-// }
-
-// export default PatientDashboard;
-
-
-
-// import { useContext, useState } from "react";
-// import { UserContext } from "../App";
-// import { Navigate, useNavigate } from "react-router-dom";
-// import bgImage from "../assets/bg-image.png";
-// import axios from 'axios'; // Add this line
-
-// const PatientDashboard = () => {
-//     const [selectedDate, setSelectedDate] = useState('');
-//     const [medicalHistory, setMedicalHistory] = useState('');
-//     const navigate = useNavigate();
-//     let { userAuth: { access_token, fullname, role, userId } } = useContext(UserContext); // Add userId
-
-//     const handleDateChange = (event) => {
-//         setSelectedDate(event.target.value);
-//     };
-
-//     const handleMedicalHistoryChange = (event) => {
-//         setMedicalHistory(event.target.value);
-//     };
-
-//     const handleSubmit = async (event) => {
-//         event.preventDefault();
-//         if (!selectedDate || !medicalHistory) {
-//             alert("All fields are required. Please fill in all fields.");
-//             return;
-//         }
-        
-//         try {
-//             const response = await axios.post(import.meta.env.VITE_SERVER_DOMAIN + '/api/appointments' , {
-//                 userId,
-//                 date: selectedDate,
-//                 medicalHistory
-//             }, {
-//                 headers: {
-//                     'Authorization': `Bearer ${access_token}`
-//                 }
-//             });
-
-//             if (response.status === 200) {
-//                 navigate('/payment.page');
-//             } else {
-//                 alert('Error booking appointment.');
-//             }
-//         } catch (error) {
-//             console.error('There was an error!', error);
-//         }
-//     };
-
-//     let characterLimit = 200;
-//     const handleTitleKeyDown = (e) => {
-//         if (e.keyCode === 13) { // enter key
-//             e.preventDefault();
-//         }
-//     };
-
-//     return (
-//         access_token === null ? <Navigate to="/signin" /> :
-
-//         <section className="h-cover mb-5">
-//             <div>
-//                 <p style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'blue', borderBottom: '3px solid black', paddingBottom: '2rem' }}>Welcome back {fullname}</p>
-//                 <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'red', borderBottom: '2px solid black', paddingBottom: '1rem' }}>{role} dashboard</h5>
-//             </div>
-
-//             <div className="row">
-//                 <div className="col-12">
-//                     <img src={bgImage} style={{ width: '95px', display: 'block', margin: '0 auto' }} />
-//                     <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', marginTop: '2rem', marginBottom: '2rem' }}>Welcome to Care-Link <br /> Your Bridge to Better Health</h5>
-//                 </div>
-
-//                 <div className="col-12" style={{ width: '100%', display: 'block', justifyContent: 'center', margin: '0 auto' }}>
-
-//                     <form onSubmit={handleSubmit} style={{ textAlign: 'center', border: '5px solid red', borderTopRightRadius: '2rem', borderBottomLeftRadius: '2rem', paddingTop: '10px', paddingBottom: '10px', backgroundColor: 'blue', paddingLeft: "10px", paddingRight: '10px' }}>
-
-//                         <div style={{ display: "flex", justifyContent: 'center', textAlign: 'center', gap: '20px', marginBottom: "2rem", marginTop: '3rem' }}>
-//                             <label style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'white' }}>Select Date and Time</label>
-//                             <input type="datetime-local" value={selectedDate} onChange={handleDateChange} />
-//                         </div>
-
-//                         <div style={{ display: "flex", justifyContent: 'center', textAlign: 'center', gap: '20px', marginBottom: "2rem", marginTop: '3rem' }}>
-//                             <label style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'white' }}> Medical History  </label>
-//                             <textarea
-//                                 maxLength={characterLimit}
-//                                 value={medicalHistory}
-//                                 onChange={handleMedicalHistoryChange}
-//                                 className="h-40 resize-none leading-7 input-box2"
-//                                 onKeyDown={handleTitleKeyDown}
-//                             >
-//                             </textarea>
-//                         </div>
-//                         <p className="text-white">Fee For Consultation -  10000</p>
-//                         <button className="btn btn-primary mb-3" type="submit">Book Appointment</button>
-
-//                     </form>
-//                 </div>
-//             </div>
-//         </section>
-//     );
-// }
-
-// export default PatientDashboard;
-
-
-import { useContext, useState } from "react";
-import { UserContext } from "../App";
-import { Navigate, useNavigate } from "react-router-dom";
-import bgImage from "../assets/bg-image.png";
+import { useContext, useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 import axios from 'axios';
+import { Toaster, toast } from 'react-hot-toast';
+import { useNavigate, Navigate } from "react-router-dom";
+import bgImage from "../assets/bg-image.png";
+import { UserContext } from '../App';
 
 const PatientDashboard = () => {
-    const [selectedDate, setSelectedDate] = useState('');
-    const [medicalHistory, setMedicalHistory] = useState('');
-    const navigate = useNavigate();
-    const { userAuth } = useContext(UserContext);
-    const { access_token, fullname, role, userId } = userAuth;
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(moment().format("HH:mm"));
+  const [details, setDetails] = useState("");
+  const [appointments, setAppointments] = useState([]);
+  const navigate = useNavigate();
+  const { userAuth: { access_token, role, fullname, email } } = useContext(UserContext);
 
-    console.log('User ID:', userId); // Add this line
+  //*********************************************for seeing appointment************************************************
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const loadingToast = toast.loading('Fetching appointments...');
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_DOMAIN}/api/appointments/patient`, {
+          headers: {
+            Authorization: `Bearer ${access_token}`
+          },
+          params: { email }
+        });
 
-    const handleDateChange = (event) => {
-        setSelectedDate(event.target.value);
+       const sortedAppointments = response.data.sort((a, b) => {
+      const dateA = new Date(`${a.date}T${a.time}`);
+      const dateB = new Date(`${b.date}T${b.time}`);
+      return dateB - dateA;
+      });
+     setAppointments(sortedAppointments);
+    toast.dismiss(loadingToast);
+    } catch (error) {
+    toast.dismiss(loadingToast);
+    }
+   };
+
+    fetchAppointments();
+  }, [access_token, email]);
+
+
+  //**********************************************************************for booking******************************************** */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const appointment = {
+      user: { fullname, email },
+      date: moment(date).format('YYYY-MM-DD'),
+      time,
+      details,
     };
 
-    const handleMedicalHistoryChange = (event) => {
-        setMedicalHistory(event.target.value);
-    };
+    if (moment(date).isBefore(moment(), 'day')) {
+      return toast.error('Please select a date in the future.');
+    }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (!selectedDate || !medicalHistory) {
-            alert("All fields are required. Please fill in all fields.");
-            return;
+    if (moment(date).isSame(moment(), 'day') && moment(time, 'HH:mm').isBefore(moment(), 'minute')) {
+      return toast.error('Please select a time in the future.');
+    }
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_DOMAIN}/api/appointments`, appointment, {
+        headers: {
+          Authorization: `Bearer ${access_token}`
         }
+      });
 
-        try {
-            console.log('Sending data:', { userId, date: selectedDate, medicalHistory }); // Add this line
+      setDate(new Date());
+      setTime(moment().format("HH:mm"));
+      setDetails("");
+      toast.success('Appointment booked successfully!');
+      console.log(response)
 
-            const response = await axios.post(import.meta.env.VITE_SERVER_DOMAIN + '/api/appointments', {
-                userId,
-                date: selectedDate,
-                medicalHistory
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${access_token}`
-                }
-            });
+      setTimeout(() => {
+        navigate("/payment.page");
+      }, 2000);
 
-            if (response.status === 201) {
-                navigate('/payment.page'); // Use the correct path to the payment page
-            } else {
-                alert('Error booking appointment.');
-            }
-        } catch (error) {
-            console.error('There was an error!', error);
-            if (error.response && error.response.status === 400) {
-                alert('Validation error: ' + error.response.data.error);
-            } else {
-                alert('Error booking appointment.');
-            }
-        }
-    };
+    } catch (error) {
+      toast.error('There was an error booking the appointment! Please try again.');
+    }
+  };
 
-    let characterLimit = 200;
-    const handleTitleKeyDown = (e) => {
-        if (e.keyCode === 13) { // enter key
-            e.preventDefault();
-        }
-    };
+  let characterLimit = 1000;
+  const handleTitleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
 
-    return (
-        access_token === null ? <Navigate to="/signin" /> :
+  if (access_token === null) {
+    return <Navigate to="/signin" />;
+  }
 
-        <section className="h-cover mb-5">
-            <div>
-                <p style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'blue', borderBottom: '3px solid black', paddingBottom: '2rem' }}>Welcome back {fullname}</p>
-                <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'red', borderBottom: '2px solid black', paddingBottom: '1rem' }}>{role} dashboard</h5>
-            </div>
+  return (
+    <>
+      <section className="h-cover mb-5">
+        <div>
+          <p style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'blue', borderBottom: '3px solid black', paddingBottom: '2rem' }}>Welcome back {fullname} </p>
+          <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', color: 'red', borderBottom: '2px solid black', paddingBottom: '1rem' }}>{role} dashboard</h5>
+        </div>
 
-            <div className="row">
-                <div className="col-12">
-                    <img src={bgImage} style={{ width: '95px', display: 'block', margin: '0 auto' }} />
-                    <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', marginTop: '2rem', marginBottom: '2rem' }}>Welcome to Care-Link <br /> Your Bridge to Better Health</h5>
-                </div>
+        <div className="row">
+          <div className="col-12">
+            <img src={bgImage} style={{ width: '95px', display: 'block', margin: '0 auto' }} alt="Background" />
+            <h5 style={{ textTransform: 'capitalize', textAlign: 'center', fontWeight: 'bold', marginTop: '2rem', marginBottom: '2rem' }}>Welcome to Care-Link <br /> Your Bridge to Better Health</h5>
+          </div>
 
-                <div className="col-12" style={{ width: '100%', display: 'block', justifyContent: 'center', margin: '0 auto' }}>
-                    <h4 className="mt-5 mb-5 text-center fw-bold">Patient Appointment Booking</h4>
-                    <form onSubmit={handleSubmit} className="border p-4 rounded shadow" style={{ background: 'white' }}>
-                        <div className="mb-3">
-                            <label htmlFor="appointmentDate" className="form-label">Select Appointment Date:</label>
-                            <input type="date" className="form-control" id="appointmentDate" value={selectedDate} onChange={handleDateChange} required />
-                        </div>
+          <div className="col-12" style={{ width: '100%', display: 'block', justifyContent: 'center', margin: '0 auto' }}>
+            <h4 className="mt-1 mb-3 text-center fw-bold">Patient Appointment Booking</h4>
+            <Toaster />
+            <form onSubmit={handleSubmit}>
+              <div>
+                <input
+                  className='input-box1'
+                  type="text"
+                  value={fullname}
+                  disabled={true}
+                  style={{textTransform:'capitalize'}}
+                />
 
-                        <div className="mb-3">
-                            <label htmlFor="medicalHistory" className="form-label">Medical History:</label>
-                            <textarea
-                                className="form-control"
-                                id="medicalHistory"
-                                rows="4"
-                                maxLength={characterLimit}
-                                placeholder="Provide brief medical history"
-                                value={medicalHistory}
-                                onChange={handleMedicalHistoryChange}
-                                onKeyDown={handleTitleKeyDown}
-                                required
-                            ></textarea>
-                            <div className="text-end">{characterLimit - medicalHistory.length} characters remaining</div>
-                        </div>
+                <input
+                  className='input-box1'
+                  type="text"
+                  value={email}
+                  disabled={true}
+                />
+              </div>
 
-                        <button type="submit" className="btn btn-primary">Book Appointment</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    );
-};
+              <div className='input-box1'>
+                <DatePicker className='input-box1' selected={date} onChange={(date) => setDate(date)} />
+              </div>
+
+              <div className='mt-3'>
+                <input
+                  className='input-box1'
+                  type="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <textarea
+                  className='input-box1'
+                  value={details}
+                  placeholder='Reason for consultation'
+                  onChange={(e) => setDetails(e.target.value)}
+                  rows="4"
+                  maxLength={characterLimit}
+                  onKeyDown={handleTitleKeyDown}
+                  required
+                  style={{resize:'none'}}
+                />
+              </div>
+
+              <div className="text-end" style={{ color: 'dodgerblue' }}>{characterLimit - details.length} characters remaining</div>
+              <p className="text-red" style={{ color: 'red', textAlign: 'center', fontWeight: "bold" }}>Fee For Consultation - 10000</p>
+              <button className='btn btn-primary' type="submit" style={{ display: 'block', margin: '0 auto' }}>Book Appointment</button>
+            </form>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12" style={{textAlign:'center'}}>
+            <h4 style={{marginTop:'2rem', borderBottom:'2px solid grey', color:'red', marginBottom:'2rem', paddingBottom:'1rem'}}>My Appointments</h4>
+            {appointments.length > 0 ? (
+              <ul>
+                {appointments.map((appointment, index) => (
+                  <div key={appointment._id} className={`appointment-item ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                    <p style={{textTransform:'capitalize', color:'dodgerblue'}}>Patient Name: { appointment.user.fullname}</p>
+                    <p>Email: {appointment.user.email}</p>
+                    <p>Appointment Date: {appointment.date}</p>
+                    <p>Appointment Time (24hrs Format): {appointment.time}</p>
+                    <p>Consultation Details: {appointment.details}</p>
+                    <p style={{color:'red'}}>Status: {appointment.status}</p>
+                  </div>
+                ))}
+              </ul>
+            ) : (
+              <p>No appointments available.</p>
+            )}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
 
 export default PatientDashboard;

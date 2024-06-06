@@ -375,6 +375,28 @@ section {
     color: white;
   }
 
+  /**********************************************doctor dashboard****************************************************************************/
+  /* .appointment-list {
+    list-style-type: none;
+    padding: 0;
+} */
+
+.appointment-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    text-align: start;
+}
+
+.appointment-item p {
+    margin: 5px 0;
+}
+
+.appointment-item:nth-child(odd) {
+    background-color: #f1f1f1;
+}
 
 
 /*************************************************media query*******************************************************/
