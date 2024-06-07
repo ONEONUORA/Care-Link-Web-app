@@ -1,4 +1,4 @@
-import { Link, useNavigate  } from "react-router-dom"
+import { useNavigate  } from "react-router-dom"
 import AnimationWrapper from "../common/page-animation"
 import { useContext } from "react"
 import { UserContext } from "../App"
@@ -21,17 +21,7 @@ const UserNavigationPanel = () =>{
                 transition={{duration:0.2}}
             >
                 <div className="usernav">
-                        {/* <Link to={`/user/${username}/`} className="link pl-5"> 
-                            Profile
-                        </Link>
-
-                        <Link to='edit-profile' className="link pl-5"> 
-                            Dashboard
-                        </Link> */}
-
-                        {/* <Link to='edit-profile' className="link pl-5"> 
-                            Settings
-                        </Link> */}
+                     
 
                         <span className="position-absolute border-top border-color-gray w-100"></span>
                         <button className="btn signout-btn" type="submit"

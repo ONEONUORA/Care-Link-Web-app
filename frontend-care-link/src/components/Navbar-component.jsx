@@ -34,7 +34,7 @@ const Navbar = () =>{
                         access_token ?
                             <>
                                 <div style={{display:'flex', justifyContent:'flex-end', gap:'20px'}}>
-                                           {/* <p style={{textTransform: 'capitalize', fontWeight:'bold', marginTop:'0.5rem'}}>{role}</p>  */}
+                                          
                                           <Link to="dashboard/notification">
                                               <button className="notification ">
                                                      <i className="bi bi-bell"></i>  

@@ -223,11 +223,7 @@ section {
   .h-cover {
     min-height: calc(100vh - 80px); 
   }
-/* 
-  .w-80 {
-    width: 80%;
-  } */
-  
+
   .btn-dark {
     white-space: nowrap;
     background-color: blue;
@@ -376,10 +372,7 @@ section {
   }
 
   /**********************************************doctor dashboard****************************************************************************/
-  /* .appointment-list {
-    list-style-type: none;
-    padding: 0;
-} */
+
 
 .appointment-item {
     border: 1px solid #ddd;
