@@ -44,54 +44,15 @@ const userSchema = mongoose.Schema({
             minlength: [3, 'Username must be at least 3 characters long'],
             unique: true,
         },
-        phone_number: {
-            type: Number,
-            default: "",
-        },
-        bio: {
-            type: String,
-            maxlength: [200, 'Bio should not be more than 200 characters'],
-            default: "",
-        },
-        specialization: {
-            type: String,
-            default: "",
-            validate: {
-                validator: function(value) {
-                    return this.role === 'doctor' || !value;
-                },
-                message: 'Only doctors can have a specialization.',
-            },
-        },
     },
-    social_links: {
-        youtube: {
-            type: String,
-            default: "",
-        },
-        instagram: {
-            type: String,
-            default: "",
-        },
-        facebook: {
-            type: String,
-            default: "",
-        },
-        twitter: {
-            type: String,
-            default: "",
-        },
-        website: {
-            type: String,
-            default: "",
-        },
-    }
+    admin:{
+        type: Boolean,
+        default:false
+    },
 
 }, {
     timestamps: true
 });
-
-// export default mongoose.model("User", userSchema);
 
 export default mongoose.model("users", userSchema);
  
